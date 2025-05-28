@@ -1,0 +1,51 @@
+name: vox_todo
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+isar_version: &isar_version 3.1.0
+
+environment:
+  sdk: '>=3.3.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.6
+
+  # DI
+  kiwi: ^4.0.1
+
+  # Bloc
+  # flutter_bloc: ^9.1.1
+
+  # Navigation
+  go_router: ^15.1.2
+
+  # Localizations
+  easy_localization: ^3.0.7+1
+
+  # UI
+  infinite_scroll_pagination: 4.1.0
+  flutter_slidable: ^4.0.0
+
+  # Database
+  isar: *isar_version
+  isar_flutter_libs: *isar_version
+  path_provider: ^2.1.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  
+  # Code generation
+  build_runner: ^2.4.13
+  isar_generator: *isar_version
+
+  # DI
+  kiwi_generator: 4.1.0
+
+flutter:
+  uses-material-design: true
