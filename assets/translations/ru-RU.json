@@ -1,0 +1,17 @@
+{
+    "listScreenTitle": "Список Задач",
+    "listScreenEmpty": "Список задач пуст",
+    "addTodoTitle": "Добавить задачу",
+    "editTodoTitle": "Редактировать задачу",
+    "todoNameTitle": "Название задачи",
+    "todoContent": "Задача",
+    "todoContextTitle": "Описание",
+    "save": "Сохранить",
+    "update": "Обновить",
+    "delete": "Удалить",
+    "titleCantBeEmpty": "Название задачи не может быть пустым",
+    "createdAt": "Создано",
+    "updatedAt": "Обновлено",
+    "emptyListText": "Список задач пуст",
+    "emptyListDescription": "Добавьте первую задачу, нажав на + в верхнем правом углу экрана."
+}
