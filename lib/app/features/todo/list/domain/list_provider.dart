@@ -35,20 +35,12 @@ final class ListScreenNotifier extends StateNotifier<TodoListState> {
     }
   }
 
-  Future<void> fetch(int page) async {
-    state = const TodoListStateLoading();
-
-    // TODO: fetch data
-
-    state = TodoListStateSuccess(pagingController: _pagingController);
-  }
-
   void refresh() {
     _pagingController.refresh();
   }
 
-  void deleteNote(int noteId) async {
-    // await _repository.deleteNote(noteId);
+  void delete(int id) async {
+    await _repository.delete(id);
     _pagingController.refresh();
   }
 }

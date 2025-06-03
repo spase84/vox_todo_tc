@@ -13,13 +13,23 @@ import 'package:vox_todo/app/settings/colors.dart' show AppColors;
 import 'package:vox_todo/app/settings/routes.dart' show Routes;
 import 'package:vox_todo/generated/locale_keys.g.dart' show LocaleKeys;
 
-class ListScreen extends StatelessWidget {
-  ListScreen({super.key});
+class ListScreen extends StatefulWidget {
+  const ListScreen({super.key});
 
-  final _provider =
-      StateNotifierProvider<ListScreenNotifier, TodoListState>((ref) {
-    return ListScreenNotifier()..init();
-  });
+  @override
+  State<ListScreen> createState() => _ListScreenState();
+}
+
+class _ListScreenState extends State<ListScreen> {
+  late final StateNotifierProvider<ListScreenNotifier, TodoListState> _provider;
+
+  @override
+  void initState() {
+    super.initState();
+    _provider = StateNotifierProvider<ListScreenNotifier, TodoListState>((_) {
+      return ListScreenNotifier()..init();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +68,6 @@ class _ListScreenBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(provider);
-
     ref.listen(provider, (_, state) {
       if (state is TodoListStateError) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -68,6 +76,8 @@ class _ListScreenBody extends ConsumerWidget {
       }
     });
 
+    final state = ref.watch(provider);
+
     return switch (state) {
       TodoListStateLoading() =>
         const Center(child: CircularProgressIndicator()),
@@ -75,7 +85,7 @@ class _ListScreenBody extends ConsumerWidget {
         Center(child: Text(message)),
       TodoListStateSuccess(pagingController: final pagingController) =>
         RefreshIndicator(
-          onRefresh: () async => ref.read(provider.notifier).fetch(1),
+          onRefresh: () async => ref.read(provider.notifier).refresh(),
           child: CustomScrollView(
             slivers: [
               SliverPadding(
@@ -117,7 +127,7 @@ class _ListScreenBody extends ConsumerWidget {
                         ref.read(provider.notifier).refresh();
                       },
                       onDelete: () {
-                        ref.read(provider.notifier).deleteNote(item.id!);
+                        ref.read(provider.notifier).delete(item.id!);
                       },
                     ),
                   ),
